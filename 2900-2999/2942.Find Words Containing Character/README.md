@@ -2,8 +2,6 @@
 
 # [2942. Find Words Containing Character](https://leetcode.com/problems/find-words-containing-character)
 
-(/solution/2900-2999/2942.Find%20Words%20Containing%20Character/README.md)
-
 ## Description
 
 <!-- description:start -->
