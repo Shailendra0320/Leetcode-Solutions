@@ -271,8 +271,137 @@ O(1)
 # Java Solution
 
 ```java
-// Approach-1
-// Paste Solution.java code
+//Approach-1 (Greedy)
+//T.C : O(n + m)
+//S.C : O(1)
+
+class Solution {
+
+    public int earliestFinishTime(
+            int[] landStartTime,
+            int[] landDuration,
+            int[] waterStartTime,
+            int[] waterDuration) {
+
+        int ans = Integer.MAX_VALUE;
+
+        int bestLandEnd = Integer.MAX_VALUE;
+
+        for (int i = 0; i < landStartTime.length; i++) {
+
+            bestLandEnd = Math.min(
+                bestLandEnd,
+                landStartTime[i] + landDuration[i]
+            );
+        }
+
+        for (int j = 0; j < waterStartTime.length; j++) {
+
+            ans = Math.min(
+                ans,
+                Math.max(bestLandEnd, waterStartTime[j])
+                + waterDuration[j]
+            );
+        }
+
+        int bestWaterEnd = Integer.MAX_VALUE;
+
+        for (int j = 0; j < waterStartTime.length; j++) {
+
+            bestWaterEnd = Math.min(
+                bestWaterEnd,
+                waterStartTime[j] + waterDuration[j]
+            );
+        }
+
+        for (int i = 0; i < landStartTime.length; i++) {
+
+            ans = Math.min(
+                ans,
+                Math.max(bestWaterEnd, landStartTime[i])
+                + landDuration[i]
+            );
+        }
+
+        return ans;
+    }
+}
+
+
+/*
+//Approach-2 (Equivalent Greedy Form)
+//T.C : O(n + m)
+//S.C : O(1)
+
+class Solution {
+
+    public int earliestFinishTime(
+            int[] landStartTime,
+            int[] landDuration,
+            int[] waterStartTime,
+            int[] waterDuration) {
+
+        int ans = Integer.MAX_VALUE;
+
+        int earliestLandFinishTime = Integer.MAX_VALUE;
+        int earliestWaterFinishTime = Integer.MAX_VALUE;
+
+        for (int i = 0; i < landStartTime.length; i++) {
+
+            earliestLandFinishTime = Math.min(
+                earliestLandFinishTime,
+                landStartTime[i] + landDuration[i]
+            );
+        }
+
+        for (int i = 0; i < waterStartTime.length; i++) {
+
+            if (waterStartTime[i] >= earliestLandFinishTime) {
+
+                ans = Math.min(
+                    ans,
+                    waterStartTime[i] + waterDuration[i]
+                );
+            }
+            else {
+
+                ans = Math.min(
+                    ans,
+                    earliestLandFinishTime + waterDuration[i]
+                );
+            }
+        }
+
+        for (int i = 0; i < waterStartTime.length; i++) {
+
+            earliestWaterFinishTime = Math.min(
+                earliestWaterFinishTime,
+                waterStartTime[i] + waterDuration[i]
+            );
+        }
+
+        for (int i = 0; i < landStartTime.length; i++) {
+
+            if (landStartTime[i] >= earliestWaterFinishTime) {
+
+                ans = Math.min(
+                    ans,
+                    landStartTime[i] + landDuration[i]
+                );
+            }
+            else {
+
+                ans = Math.min(
+                    ans,
+                    earliestWaterFinishTime + landDuration[i]
+                );
+            }
+        }
+
+        return ans;
+    }
+}
+*/
 ```
 
 ---
@@ -280,6 +409,137 @@ O(1)
 # C++ Solution
 
 ```cpp
-// Approach-1
-// Paste Solution.cpp code
+//Approach-1 (Greedy)
+//T.C : O(n + m)
+//S.C : O(1)
+
+class Solution {
+public:
+
+    int earliestFinishTime(
+        vector<int>& landStartTime,
+        vector<int>& landDuration,
+        vector<int>& waterStartTime,
+        vector<int>& waterDuration) {
+
+        int ans = INT_MAX;
+
+        int bestLandEnd = INT_MAX;
+
+        for (int i = 0; i < landStartTime.size(); i++) {
+
+            bestLandEnd = min(
+                bestLandEnd,
+                landStartTime[i] + landDuration[i]
+            );
+        }
+
+        for (int j = 0; j < waterStartTime.size(); j++) {
+
+            ans = min(
+                ans,
+                max(bestLandEnd, waterStartTime[j])
+                + waterDuration[j]
+            );
+        }
+
+        int bestWaterEnd = INT_MAX;
+
+        for (int j = 0; j < waterStartTime.size(); j++) {
+
+            bestWaterEnd = min(
+                bestWaterEnd,
+                waterStartTime[j] + waterDuration[j]
+            );
+        }
+
+        for (int i = 0; i < landStartTime.size(); i++) {
+
+            ans = min(
+                ans,
+                max(bestWaterEnd, landStartTime[i])
+                + landDuration[i]
+            );
+        }
+
+        return ans;
+    }
+};
+
+
+/*
+//Approach-2 (Equivalent Greedy Form)
+//T.C : O(n + m)
+//S.C : O(1)
+
+class Solution {
+public:
+
+    int earliestFinishTime(
+        vector<int>& landStartTime,
+        vector<int>& landDuration,
+        vector<int>& waterStartTime,
+        vector<int>& waterDuration) {
+
+        int ans = INT_MAX;
+
+        int earliestLandFinishTime = INT_MAX;
+        int earliestWaterFinishTime = INT_MAX;
+
+        for (int i = 0; i < landStartTime.size(); i++) {
+
+            earliestLandFinishTime = min(
+                earliestLandFinishTime,
+                landStartTime[i] + landDuration[i]
+            );
+        }
+
+        for (int i = 0; i < waterStartTime.size(); i++) {
+
+            if (waterStartTime[i] >= earliestLandFinishTime) {
+
+                ans = min(
+                    ans,
+                    waterStartTime[i] + waterDuration[i]
+                );
+            }
+            else {
+
+                ans = min(
+                    ans,
+                    earliestLandFinishTime + waterDuration[i]
+                );
+            }
+        }
+
+        for (int i = 0; i < waterStartTime.size(); i++) {
+
+            earliestWaterFinishTime = min(
+                earliestWaterFinishTime,
+                waterStartTime[i] + waterDuration[i]
+            );
+        }
+
+        for (int i = 0; i < landStartTime.size(); i++) {
+
+            if (landStartTime[i] >= earliestWaterFinishTime) {
+
+                ans = min(
+                    ans,
+                    landStartTime[i] + landDuration[i]
+                );
+            }
+            else {
+
+                ans = min(
+                    ans,
+                    earliestWaterFinishTime + landDuration[i]
+                );
+            }
+        }
+
+        return ans;
+    }
+};
+*/
 ```
