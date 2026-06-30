@@ -82,5 +82,86 @@ public:
 */
 
 /*
+//Approach-3 (Prefix Sum + Fenwick Tree)
+//T.C : O(n log n)
+//S.C : O(n)
 
+class Solution {
+public:
+
+    struct Fenwick {
+
+        vector<int> bit;
+
+        Fenwick(int n) {
+            bit.assign(n + 2, 0);
+        }
+
+        void update(int idx) {
+
+            while (idx < bit.size()) {
+                bit[idx]++;
+                idx += idx & -idx;
+            }
+        }
+
+        int query(int idx) {
+
+            int sum = 0;
+
+            while (idx > 0) {
+                sum += bit[idx];
+                idx -= idx & -idx;
+            }
+
+            return sum;
+        }
+    };
+
+    int countMajoritySubarrays(
+        vector<int>& nums,
+        int target
+    ) {
+
+        int n = nums.size();
+
+        vector<int> prefix(n + 1);
+
+        for (int i = 0; i < n; i++) {
+
+            prefix[i + 1] =
+                prefix[i] +
+                (nums[i] == target ? 1 : -1);
+        }
+
+        vector<int> values = prefix;
+
+        sort(values.begin(), values.end());
+
+        values.erase(
+            unique(values.begin(), values.end()),
+            values.end()
+        );
+
+        Fenwick tree(values.size() + 2);
+
+        long long answer = 0;
+
+        for (int value : prefix) {
+
+            int index =
+                lower_bound(
+                    values.begin(),
+                    values.end(),
+                    value
+                ) - values.begin() + 1;
+
+            answer += tree.query(index - 1);
+
+            tree.update(index);
+        }
+
+        return (int)answer;
+    }
+};
 */

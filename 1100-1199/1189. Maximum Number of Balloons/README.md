@@ -24,9 +24,11 @@ https://leetcode.com/u/Shailu03/
 ```text
 String
 Hash Table
-Counting
 Frequency Array
+Counting
 Greedy
+Java
+C++
 ```
 
 ---
@@ -41,55 +43,72 @@ balloon
 
 from the given string.
 
-The word contains:
+The word:
 
 ```text
-b -> 1 time
-
-a -> 1 time
-
-l -> 2 times
-
-o -> 2 times
-
-n -> 1 time
+balloon
 ```
 
-The answer depends on the character that runs out first.
+contains:
+
+```text
+b → 1
+
+a → 1
+
+l → 2
+
+o → 2
+
+n → 1
+```
+
+Therefore:
+
+```text
+The character that runs out first
+determines the answer.
+```
 
 ---
 
 # Character Requirement Table
 
-| Character | Required |
-| --------- | -------- |
-| b         | 1        |
-| a         | 1        |
-| l         | 2        |
-| o         | 2        |
-| n         | 1        |
+| Character | Needed |
+| --------- | ------ |
+| b         | 1      |
+| a         | 1      |
+| l         | 2      |
+| o         | 2      |
+| n         | 1      |
 
 ---
 
-# Approach
+# Approach 1 — Frequency Array (Optimal)
 
-Count frequency of all characters.
+## Idea
 
-Then calculate:
+Count frequency of all characters using:
 
 ```text
-b count
-
-a count
-
-l count / 2
-
-o count / 2
-
-n count
+int[26]
 ```
 
-The minimum among them is the answer.
+Then compute:
+
+```text
+b
+
+a
+
+l/2
+
+o/2
+
+n
+```
+
+The minimum value is the answer.
 
 ---
 
@@ -106,7 +125,7 @@ Build Frequency Array
         │
         ▼
 
-Count:
+Count
 
 b
 a
@@ -134,15 +153,146 @@ Return Answer
 
 ---
 
-# Example
+# Visualization
 
 Input
 
 ```text
-text = "loonbalxballpoon"
+loonbalxballpoon
 ```
 
 ---
+
+Count Characters
+
+```text
+b = 2
+
+a = 2
+
+l = 4
+
+o = 4
+
+n = 2
+```
+
+---
+
+Possible Balloons
+
+```text
+b = 2
+
+a = 2
+
+l = 4/2 = 2
+
+o = 4/2 = 2
+
+n = 2
+```
+
+---
+
+Answer
+
+```text
+2
+```
+
+---
+
+# Approach 2 — HashMap
+
+## Idea
+
+Instead of:
+
+```text
+int[26]
+```
+
+store frequencies inside:
+
+```text
+HashMap<Character,Integer>
+```
+
+or
+
+```text
+unordered_map<char,int>
+```
+
+Then calculate:
+
+```text
+b
+
+a
+
+l/2
+
+o/2
+
+n
+```
+
+and return the minimum.
+
+---
+
+# HashMap Flow
+
+```text
+Traverse String
+
+        │
+        ▼
+
+Store Frequency
+Inside HashMap
+
+        │
+        ▼
+
+Extract
+
+b
+a
+l
+o
+n
+
+        │
+        ▼
+
+Apply
+
+l/2
+o/2
+
+        │
+        ▼
+
+Minimum Value
+
+        │
+        ▼
+
+Answer
+```
+
+---
+
+# Detailed Dry Run
+
+Input
+
+```text
+balloonballoon
+```
 
 Frequency
 
@@ -160,81 +310,7 @@ n = 2
 
 ---
 
-Possible balloons
-
-```text
-b = 2
-
-a = 2
-
-l = 4/2 = 2
-
-o = 4/2 = 2
-
-n = 2
-```
-
-Answer
-
-```text
-2
-```
-
----
-
-# Visualization
-
-```text
-loonbalxballpoon
-
-↓
-
-Count Characters
-
-↓
-
-b = 2
-a = 2
-l = 4
-o = 4
-n = 2
-
-↓
-
-min(2,2,2,2,2)
-
-↓
-
-2
-```
-
----
-
-# Detailed Dry Run
-
-Input
-
-```text
-text = "balloonballoon"
-```
-
-Frequency:
-
-```text
-b = 2
-
-a = 2
-
-l = 4
-
-o = 4
-
-n = 2
-```
-
----
-
-Required
+Requirement
 
 ```text
 b = 1
@@ -253,7 +329,7 @@ n = 1
 Possible Words
 
 ```text
-2 balloons
+2
 ```
 
 Answer
@@ -312,17 +388,41 @@ min(
 
 # Why This Works
 
-To create:
+To build:
 
 ```text
 balloon
 ```
 
-every required character must be available.
+we need:
 
-The limiting character determines how many complete words can be formed.
+```text
+b
 
-Therefore:
+a
+
+l
+
+l
+
+o
+
+o
+
+n
+```
+
+Every balloon consumes:
+
+```text
+1 b
+1 a
+2 l
+2 o
+1 n
+```
+
+Hence:
 
 ```text
 Answer
@@ -340,33 +440,54 @@ n
 
 ---
 
+# Approaches Comparison
+
+| Approach        | Data Structure          | Time | Space  |
+| --------------- | ----------------------- | ---- | ------ |
+| Frequency Array | int[26]                 | O(n) | O(1)   |
+| HashMap         | HashMap / unordered_map | O(n) | O(1)\* |
+
+```text
+* At most 26 lowercase letters.
+```
+
+---
+
 # Complexity Analysis
 
-## Time Complexity
+## Approach 1 — Frequency Array
+
+### Time Complexity
 
 ```text
 O(n)
 ```
 
-Single traversal of string.
-
----
-
-## Space Complexity
+### Space Complexity
 
 ```text
 O(1)
 ```
 
-Frequency array size is fixed:
+---
+
+## Approach 2 — HashMap
+
+### Time Complexity
 
 ```text
-26
+O(n)
+```
+
+### Space Complexity
+
+```text
+O(1)
 ```
 
 ---
 
-# Java Solution
+# Java Solution 1 (Frequency Array)
 
 ```java
 class Solution {
@@ -398,7 +519,53 @@ class Solution {
 
 ---
 
-# C++ Solution
+# Java Solution 2 (HashMap)
+
+```java
+class Solution {
+
+    public int maxNumberOfBalloons(String text) {
+
+        Map<Character,Integer> frequency =
+            new HashMap<>();
+
+        for(char ch : text.toCharArray()){
+
+            frequency.put(
+                ch,
+                frequency.getOrDefault(ch,0)+1
+            );
+        }
+
+        int b =
+            frequency.getOrDefault('b',0);
+
+        int a =
+            frequency.getOrDefault('a',0);
+
+        int l =
+            frequency.getOrDefault('l',0)/2;
+
+        int o =
+            frequency.getOrDefault('o',0)/2;
+
+        int n =
+            frequency.getOrDefault('n',0);
+
+        return Math.min(
+            Math.min(b,a),
+            Math.min(
+                l,
+                Math.min(o,n)
+            )
+        );
+    }
+}
+```
+
+---
+
+# C++ Solution 1 (Frequency Array)
 
 ```cpp
 class Solution {
@@ -406,23 +573,62 @@ public:
 
     int maxNumberOfBalloons(string text) {
 
-        vector<int> frequency(26, 0);
+        vector<int> frequency(26,0);
 
-        for(char ch : text) {
-            frequency[ch - 'a']++;
+        for(char ch : text){
+
+            frequency[ch-'a']++;
         }
 
         return min(
             min(
-                frequency['b' - 'a'],
-                frequency['a' - 'a']
+                frequency['b'-'a'],
+                frequency['a'-'a']
             ),
             min(
-                frequency['l' - 'a'] / 2,
+                frequency['l'-'a']/2,
                 min(
-                    frequency['o' - 'a'] / 2,
-                    frequency['n' - 'a']
+                    frequency['o'-'a']/2,
+                    frequency['n'-'a']
                 )
+            )
+        );
+    }
+};
+```
+
+---
+
+# C++ Solution 2 (unordered_map)
+
+```cpp
+class Solution {
+public:
+
+    int maxNumberOfBalloons(string text) {
+
+        unordered_map<char,int> frequency;
+
+        for(char ch : text){
+
+            frequency[ch]++;
+        }
+
+        int b = frequency['b'];
+
+        int a = frequency['a'];
+
+        int l = frequency['l']/2;
+
+        int o = frequency['o']/2;
+
+        int n = frequency['n'];
+
+        return min(
+            min(b,a),
+            min(
+                l,
+                min(o,n)
             )
         );
     }
