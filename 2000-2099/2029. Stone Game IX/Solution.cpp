@@ -1,14 +1,20 @@
-cd C :\Leetcode_Solutions
+class Solution
+{
+public:
+  bool stoneGameIX(vector<int> &stones)
+  {
+    int cnt[3] = {0, 0, 0};
 
-        git status
+    for (int stone : stones)
+    {
+      cnt[stone % 3]++;
+    }
 
-            git add.
+    if (cnt[0] % 2 == 0)
+    {
+      return cnt[1] != 0 && cnt[2] != 0;
+    }
 
-    git status
-
-        git commit -
-    m "Add Modulo Counting solution for LeetCode 2029"
-
-    git pull origin main-- rebase
-
-        git push origin main
+    return abs(cnt[1] - cnt[2]) > 2;
+  }
+};
