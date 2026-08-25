@@ -574,13 +574,13 @@ nums = [8, 2, 3, 4, 6]
 k = 2
 ```
 
-| Step | Multiple | Present? | Action |
-|:---:|---:|:---:|:---|
-| 1 | `2` | Yes | Continue |
-| 2 | `4` | Yes | Continue |
-| 3 | `6` | Yes | Continue |
-| 4 | `8` | Yes | Continue |
-| 5 | `10` | No | Return `10` |
+| Step | Multiple | Present? | Action      |
+| :--: | -------: | :------: | :---------- |
+|  1   |      `2` |   Yes    | Continue    |
+|  2   |      `4` |   Yes    | Continue    |
+|  3   |      `6` |   Yes    | Continue    |
+|  4   |      `8` |   Yes    | Continue    |
+|  5   |     `10` |    No    | Return `10` |
 
 Final answer:
 
@@ -821,11 +821,11 @@ This is the most memory-efficient solution for the given constraints.
 
 # Approach Comparison
 
-| Approach | Time | Space | Recommendation |
-|:---|:---:|:---:|:---|
-| Brute Force + Array Search | **O(n²)** | **O(1)** | Conceptual baseline |
-| HashSet + Enumeration | **O(n)** average | **O(n)** | ⭐ General solution |
-| Boolean Array + Enumeration | **O(n)** | **O(1)** | ⭐⭐⭐ Best for given constraints |
+| Approach                    |       Time       |  Space   | Recommendation                    |
+| :-------------------------- | :--------------: | :------: | :-------------------------------- |
+| Brute Force + Array Search  |    **O(n²)**     | **O(1)** | Conceptual baseline               |
+| HashSet + Enumeration       | **O(n)** average | **O(n)** | ⭐ General solution               |
+| Boolean Array + Enumeration |     **O(n)**     | **O(1)** | ⭐⭐⭐ Best for given constraints |
 
 ---
 
@@ -1565,11 +1565,11 @@ Space Complexity : O(1)
 
 # Complexity Comparison
 
-| Approach | Time | Space | Best Use |
-|:---|:---:|:---:|:---|
-| Brute Force | **O(n²)** | **O(1)** | Learning / baseline |
-| HashSet + Enumeration | **O(n)** average | **O(n)** | ⭐ General solution |
-| Boolean Array + Enumeration | **O(n)** | **O(1)** | ⭐⭐⭐ Best for given constraints |
+| Approach                    |       Time       |  Space   | Best Use                          |
+| :-------------------------- | :--------------: | :------: | :-------------------------------- |
+| Brute Force                 |    **O(n²)**     | **O(1)** | Learning / baseline               |
+| HashSet + Enumeration       | **O(n)** average | **O(n)** | ⭐ General solution               |
+| Boolean Array + Enumeration |     **O(n)**     | **O(1)** | ⭐⭐⭐ Best for given constraints |
 
 ---
 
