@@ -1,9 +1,9 @@
-#include <bits/stdc++.h>
-using namespace std;
-
 // Approach-1 (Greedy Required-Closing Counter)
 // T.C : O(n)
 // S.C : O(1)
+
+#include <bits/stdc++.h>
+using namespace std;
 
 class Solution
 {
